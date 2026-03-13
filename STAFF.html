@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MilkTea Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>MilkTea<span>Dash</span></h1>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+        <button class="nav-btn" data-section="inventory">Inventory</button>
+        <button class="nav-btn" data-section="orders">Orders</button>
+        <button class="nav-btn" data-section="delivery">Delivery</button>
+        <button class="nav-btn" data-section="reports">Reports</button>
+      </nav>
+      <div class="sidebar-footer">Admin • MilkTea Shop</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <input id="globalSearch" placeholder="Search products, orders, IDs..." />
+        </div>
+        <div class="top-actions">
+          <button id="btnAddProduct" class="primary">+ Add Product</button>
+          <button id="btnNewOrder">+ New Order</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="section active-section">
+        <h2>Overview</h2>
+        <div class="cards">
+          <div class="card">
+            <h3 id="statProducts">Products</h3>
+            <p id="statProductsVal">—</p>
+          </div>
+          <div class="card">
+            <h3 id="statOrders">Orders</h3>
+            <p id="statOrdersVal">—</p>
+          </div>
+          <div class="card">
+            <h3 id="statPending">Pending Delivery</h3>
+            <p id="statPendingVal">—</p>
+          </div>
+        </div>
+
+        <div class="recent">
+          <div class="recent-left">
+            <h3>Recent Orders</h3>
+            <table id="recentOrdersTable" class="table">
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="recent-right">
+            <h3>Low Stock</h3>
+            <ul id="lowStockList" class="list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="inventory" class="section">
+        <h2>Inventory</h2>
+        <div class="toolbar">
+          <select id="filterCategory">
+            <option value="all">All categories</option>
+          </select>
+          <input id="inventorySearch" placeholder="Search product name..." />
+        </div>
+
+        <table id="productsTable" class="table">
+          <thead>
+            <tr>
+              <th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="orders" class="section">
+        <h2>Orders</h2>
+        <div class="toolbar">
+          <select id="ordersFilter">
+            <option value="all">All statuses</option>
+            <option value="Received">Received</option>
+            <option value="Preparing">Preparing</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <input id="orderSearch" placeholder="Search orders..." />
+        </div>
+        <table id="ordersTable" class="table">
+          <thead>
+            <tr><th>ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="delivery" class="section">
+        <h2>Delivery Tracking</h2>
+        <div class="delivery-grid">
+          <div>
+            <h3>Active Deliveries</h3>
+            <table id="deliveryTable" class="table">
+              <thead><tr><th>Order</th><th>Rider</th><th>Progress</th><th>ETA</th><th>Actions</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div>
+            <h3>Map / Last Known Location</h3>
+            <div id="mapPlaceholder" class="map">No real map — placeholder</div>
+            <div id="locationInfo" class="location-info">Select an active delivery to view last known location & ETA.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reports" class="section">
+        <h2>Reports</h2>
+        <p>Simple live report: totals and some charts could be added later.</p>
+        <div class="report-cards">
+          <div class="card small"><h4>Total Revenue</h4><p id="totalRevenue">₱0</p></div>
+          <div class="card small"><h4>Top Product</h4><p id="topProduct">—</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" id="modalClose">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
